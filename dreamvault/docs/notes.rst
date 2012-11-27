@@ -12,6 +12,7 @@ Design Principles:
     - full anonymity masks names of people and places and does not
       identify dream with author's account
 - Social network elements (follow, friend)
+- Social login (facebook/google, etc)
 - Dream comments
 - integration with other social networks (for login & sharing)
 - API so apps can be created for other platforms
@@ -20,8 +21,6 @@ Design Principles:
     - tag/mood/reaction analysis
     - similar dreams
 - General discussion threads (probably third party hosted)
-- dream art (attach media)
-
 
 Data Design
 -----------
@@ -66,5 +65,12 @@ dream mood tags:
     - loved
     - terror
     - neutral
+
+Future Ideas
+------------
+- dream art (attach media)
+- facebook integration
+- other social media integration
+- native mobile apps and/or mobile specific web interface
 
 
