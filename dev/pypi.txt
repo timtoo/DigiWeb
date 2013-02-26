@@ -1,0 +1,7 @@
+psycopg2
+PIL
+git+http://github.com/django/django.git@stable/1.5.x#egg=django
+django-allauth
+django-avatar
+gunicorn
+
