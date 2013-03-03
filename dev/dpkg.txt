@@ -1,3 +1,4 @@
 build-essential
+python-dev
 postgresql
 libpq-dev

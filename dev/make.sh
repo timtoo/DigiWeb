@@ -1,38 +1,47 @@
-#!bash
+#!/bin/sh
 
-# Create a virtual environment and ensure all requirements are installed
-#
-# Provide a path on the command line.
-#
-# 1. Check dpkg.txt packages are installed (by attempting to install/update them)
-# 2. Create virtualenv environment
-# 3. Install all the pypi packages from pypi.txt
-#
-# Note: Assumes pip and virtualenv are already installed
+# see readme.txt in this directory for information
 
 BASEDIR=$(dirname $0)
 
-PIP=`which pip`
 VIRTUALENV=`which virtualenv`
-APTGET=`which apg-get`
+APTGET=`which apt-get`
+
+DPKG_LIST=$BASEDIR/dpkg.txt
+PYPI_LIST=$BASEDIR/pypi.txt
+
+
+echo "Bulding environemnt..."
+echo "virtualenv: ${VIRTUALENV:=Not found!}"
+echo "apt-get: ${APTGET:=Not found!}"
+echo "dpkgs: ${DPKG_LIST:=Not found!}"
+echo "pypis: ${PYPI_LIST:=Not found!}"
+echo ""
 
 # ensure path argument is provided
 if [ "$1" != "" ]; then
 
     # install apt-get packages if any
-    if [ -f dpkg.txt ]; then
-        cat dpkg.txt | (while read a; do sudo $APTGET -y install $a; done)
+    if [ -f $DPKG_LIST ]; then
+        cat $DPKG_LIST | (while read a; do sudo $APTGET -y install $a; done)
     fi
 
     # create and activate virtualenv
-    $VIRTUALENV "$1"
+    if [ ! -f $1/bin/activate ]; then
+        $VIRTUALENV --no-site-packages "$1"
+    else
+        echo "Virtualenv seems to exists: activating."
+    fi
     . "$1/bin/activate"
+
+    PIP=`which pip`
+    echo "pip: ${PIP:=Not found!}"
 
     if [ "$VIRTUAL_ENV" != "" ]; then
 
         # install python packages
-        if [ -f pypi.txt ]; then
-            $PIP install --upgrade -r pypi.txt
+        if [ -f $PYPI_LIST ]; then
+            $PIP install --upgrade -r $PYPI_LIST
         fi
 
     else
