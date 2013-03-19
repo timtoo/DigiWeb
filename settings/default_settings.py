@@ -1,7 +1,8 @@
-# Django settings for dv project.
+# DEFAULT settings
 
-DEBUG = True
-TEMPLATE_DEBUG = DEBUG
+###########################################################################
+# The following settings probably should be overridein in local_settings.py
+###########################################################################
 
 ADMINS = (
     ('Tim', 'xxvii.x@gmail.com'),
@@ -11,26 +12,27 @@ MANAGERS = ADMINS
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'dreamvault',                      # Or path to database file if using sqlite3.
-        'USER': 'dreamvault',                      # Not used with sqlite3.
-        'PASSWORD': 'dvfull++!',                  # Not used with sqlite3.
-        'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
-        'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'database-name',
+        'USER': 'database-username',
+        'PASSWORD': 'database-password',
+        'HOST': 'database-host-if-any',
+        'PORT': 'database-port-if-any',
     }
 }
 
-#DATABASES['default']['USER'] = 'dreamer'
-#DATABASES['default']['PASSWORD'] = 'dvuser++?'
-
-# Local time zone for this installation. Choices can be found here:
-# http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
-# although not all choices may be available on all operating systems.
-# On Unix systems, a value of None will cause Django to use the same
-# timezone as the operating system.
-# If running in a Windows environment this must be set to the same as your
-# system time zone.
 TIME_ZONE = 'America/Toronto'
+
+# Make this unique, and don't share it with anybody.
+SECRET_KEY = 'override-this-in-local-settings'
+
+
+###################################################################################
+# settings following this line hopefully do not need to be overridden locally
+###################################################################################
+
+DEBUG = False
+TEMPLATE_DEBUG = DEBUG
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
@@ -85,9 +87,6 @@ STATICFILES_FINDERS = (
 #    'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
 
-# Make this unique, and don't share it with anybody.
-SECRET_KEY = 'l(=!y-2g^4(_el2u7!v(xfo0!6_0^11q5lg#w^h5sx4)+$m3zv'
-
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',
@@ -118,7 +117,7 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-     'django.contrib.admin',
+    'django.contrib.admin',
     'dreamvault',
 )
 
@@ -144,3 +143,5 @@ LOGGING = {
         },
     }
 }
+
+
