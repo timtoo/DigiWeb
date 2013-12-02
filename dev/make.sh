@@ -11,7 +11,8 @@ DPKG_LIST=$BASEDIR/dpkg.txt
 PYPI_LIST=$BASEDIR/pypi.txt
 
 
-echo "Bulding environemnt..."
+echo "Bulding environemnt (for Debian/Ubuntu)..."
+echo ""
 echo "virtualenv: ${VIRTUALENV:=Not found!}"
 echo "apt-get: ${APTGET:=Not found!}"
 echo "dpkgs: ${DPKG_LIST:=Not found!}"
@@ -44,11 +45,22 @@ if [ "$1" != "" ]; then
             $PIP install --upgrade -r $PYPI_LIST
         fi
 
+        cd $1
+        DJANGO_PROJ=$1/django_project
+        echo "Creating django project at $DJANGO_PROJ ..."
+        ./bin/django-admin.py startproject django_project
+
+        echo "Creating app symlinks from $BASEDIR to $DJANGO_PROJ ..."
+        ln -vs $BASEDIR/urls.py $BASEDIR/settings $BASEDIR/dreamvault .
+
+        echo "!! You need to set up the database, copy/link settings/local_settings_example.py"
+        echo ""  to local_settings.py and run: python manage.py syncdb !!"
+
     else
         echo "VIRTUAL_ENV not active, skipping installing pypi packages."
     fi
 
 else
-    echo "Provide path for build environment"
+    echo "!! Provide path for build environment: sh make.sh /path/to/build"
 fi
 

@@ -3,11 +3,6 @@ from datetime import datetime
 from django.db import models
 from django.contrib.auth.models import User
 
-class Profile(models.Model):
-    master_persona = models.ForeignKey(Persona, blank=True)
-    default_privacy = models.IntgerField(default=0)
-
-
 
 class Persona(models.Model):
     """A person in a dream, real and anonymized information"""
@@ -18,14 +13,19 @@ class Persona(models.Model):
             help_text="This name is always anonymized whether the post is anonymouse or not")
     bio = models.TextField(help_text="Brief description of this person")
     gender = models.CharField(max_length=1, blank=True)
-    gender_priv = models.models.integerField(default=0)
+    gender_priv = models.IntegerField(default=0)
     birthdate = models.DateField(blank=True)
-    birthdate_priv = models.models.integerField(default=0)
+    birthdate_priv = models.IntegerField(default=0)
     country = models.TextField(max_length=250)
     city = models.TextField(max_length=250)
     created = models.DateTimeField(default=datetime.now())
     updated = models.DateTimeField(default=datetime.now())
     owner = models.ForeignKey(User)
+
+class Profile(models.Model):
+    master_persona = models.ForeignKey(Persona, blank=True)
+    default_privacy = models.IntegerField(default=0)
+
 
 
 class Dream(models.Model):
