@@ -2,6 +2,7 @@ from datetime import datetime
 
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils.timezone import now
 
 
 class Persona(models.Model):
@@ -33,8 +34,8 @@ class Dream(models.Model):
     body = models.TextField()
     comment = models.TextField()
     dream_date = models.DateTimeField(blank=True)
-    created = models.DateTimeField(default=datetime.now())
-    updated = models.DateTimeField(default=datetime.now())
+    created = models.DateTimeField(default=now)
+    updated = models.DateTimeField(default=now)
     status = models.IntegerField(default=False)
     dreamer = models.ForeignKey(Persona)
     vividness = models.IntegerField(blank=True,
@@ -65,7 +66,7 @@ class Tag(models.Model):
 class DreamTag(models.Model):
     dream = models.ForeignKey(Dream)
     tag = models.ForeignKey(Tag)
-    tagged = models.DateTimeField(default=datetime.now())
+    tagged = models.DateTimeField(default=now)
 
 
 
