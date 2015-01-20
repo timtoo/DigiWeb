@@ -8,7 +8,7 @@ VIRTUALENV=`which virtualenv`
 APTGET=`which apt-get`
 
 DPKG_LIST=$BASEDIR/dpkg.txt
-PYPI_LIST=$BASEDIR/pypi.txt
+PYPI_LIST=$BASEDIR/requirements.txt
 
 
 echo "Bulding environemnt (for Debian/Ubuntu)..."
