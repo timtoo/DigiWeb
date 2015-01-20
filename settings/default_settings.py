@@ -128,3 +128,43 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/dev/howto/static-files/
 
 STATIC_URL = '/static/'
+
+
+# AllAuth
+
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+ACCOUNT_UNIQUE_EMAIL = True
+ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_PASSWORD_MIN_LENGTH = 8
+
+# note: deprecated in django 1.8?
+TEMPLATE_CONTEXT_PROCESSORS = ("django.contrib.auth.context_processors.auth",
+    "django.template.context_processors.debug",
+    "django.template.context_processors.i18n",
+    "django.template.context_processors.media",
+    "django.template.context_processors.static",
+    "django.template.context_processors.tz",
+    "django.contrib.messages.context_processors.messages",
+
+    "allauth.account.context_processors.account",
+    "allauth.socialaccount.context_processors.socialaccount",
+    )
+
+AUTHENTICATION_BACKENDS = ('django.contrib.auth.backends.ModelBackend',
+    "allauth.account.auth_backends.AuthenticationBackend",
+    )
+
+INSTALLED_APPS = INSTALLED_APPS +
+    (
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+#    'allauth.socialaccount.providers.amazon',
+#    'allauth.socialaccount.providers.facebook',
+#    'allauth.socialaccount.providers.google',
+#    'allauth.socialaccount.providers.persona',
+#    'allauth.socialaccount.providers.tumblr',
+#    'allauth.socialaccount.providers.twitter',
+    )
+
+
