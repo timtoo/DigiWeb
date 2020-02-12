@@ -1,4 +1,4 @@
-Django==1.8
+Django==1.11.28
 Pillow==2.7.0
 django-allauth==0.19.0
 django-avatar==2.0
